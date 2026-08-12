@@ -13,7 +13,11 @@ const paths: Record<SocialType, string> = {
 
 export function SocialLinks() {
   return (
-    <ul role="list" aria-label="Social media links" className="mt-16 flex list-none justify-center gap-2 p-0">
+    <ul
+      role="list"
+      aria-label="Social media links"
+      className="mt-16 flex list-none justify-center gap-2 p-0"
+    >
       {wedding.contact.socials.map((social) => (
         <li key={social.type} className="h-10 w-10 shrink-0">
           <a
@@ -33,7 +37,12 @@ export function SocialLinks() {
               xmlns="http://www.w3.org/2000/svg"
               className="h-10 w-10"
             >
-              <path fillRule="evenodd" clipRule="evenodd" d={paths[social.type]} fill="#000000" />
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d={paths[social.type]}
+                fill="#000000"
+              />
             </svg>
           </a>
         </li>

@@ -7,7 +7,7 @@ export function Hero() {
     <section className="hero section-shell" id="hero">
       <PaperDecor variant="top" />
       <div className="hero__content">
-        <p className="hero__eyebrow"><LocalizedTextView value={wedding.copy.hero.subtitle} /></p>
+        <p className="hero__eyebrow"><LocalizedTextView value={wedding.copy.heroSubtitle} /></p>
         <h1 className="hero__names">
           <span>{wedding.couple.groom}</span>
           <span className="hero__amp">&amp;</span>
