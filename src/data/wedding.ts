@@ -140,7 +140,7 @@ export type WeddingConfig = Readonly<{
   }>;
 }>;
 
-const gallery = [
+const gallery_women = [
   "https://static.tildacdn.com/tild6466-6131-4132-b931-323762336566/IMG_3770_tilda280014.jpeg",
   "https://static.tildacdn.com/tild6536-6232-4132-b338-376262373933/IMG_7691.JPG",
   "https://static.tildacdn.com/tild6431-3161-4863-a266-303963383230/IMG_9244_tilda266609.jpeg",
@@ -148,6 +148,17 @@ const gallery = [
   "https://static.tildacdn.com/tild6332-3534-4466-b664-343462313565/0be964deae5e6757ac7e.jpg",
   "https://static.tildacdn.com/tild6566-6264-4130-a662-393935373430/_WhatsApp_2024-02-01.jpg",
   "https://static.tildacdn.com/tild3330-6162-4466-b731-633033376634/IMG_7640.JPG",
+] as const;
+
+const gallery_man = [
+  "https://static.tildacdn.com/tild3531-6165-4235-a534-393834616666/c381cdbb017aa19af394.jpg",
+  "https://static.tildacdn.com/tild6132-3939-4031-b963-393136366233/23809cd177f050611d37.jpg",
+  "https://static.tildacdn.com/tild6565-3738-4262-b736-663162346264/IMG_0464_tilda265365.jpeg",
+  "https://static.tildacdn.com/tild6566-3565-4161-b562-353538323832/IMG_0012_tilda276016.JPG",
+  "https://static.tildacdn.com/tild3932-3463-4461-b535-386362363466/a11ff53814be76dd77f7.jpg",
+  "https://static.tildacdn.com/tild3132-3465-4464-b961-303265366535/WhatsApp_Image_2024-.jpeg",
+  "https://static.tildacdn.com/tild3463-3262-4934-a139-383832653562/630F5250-9DFB-45A7-8.jpeg",
+  "https://static.tildacdn.com/tild3736-3333-4264-a337-373732646665/5044B139-F55E-472B-A.jpeg",
 ] as const;
 
 export const wedding: WeddingConfig = {
@@ -247,7 +258,7 @@ export const wedding: WeddingConfig = {
         ky: "Кечки көйнөктөр, костюмдар, юбкалар жана жарашыктуу аксессуарлар ылайыктуу.",
         ru: "Вечерние платья, костюмы, юбки, блузки и аккуратные аксессуары приветствуются.",
       },
-      images: gallery,
+      images: gallery_women,
     },
     men: {
       title: { ky: "Мырзалар", ru: "Мужчины" },
@@ -255,7 +266,7 @@ export const wedding: WeddingConfig = {
         ky: "Классикалык же заманбап костюм, шым жана жакет сыяктуу тыкан образдар ылайыктуу.",
         ru: "Подойдут классические и современные образы: брюки, рубашка, пиджак или лаконичный костюм.",
       },
-      images: gallery,
+      images: gallery_man,
     },
   },
   contact: {
