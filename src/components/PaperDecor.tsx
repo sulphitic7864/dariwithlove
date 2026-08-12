@@ -29,7 +29,7 @@ export function PaperDecor({ variant = "both", className = "" }: Props) {
       />
       <Image
         className="paper-decor__cluster paper-decor__cluster--left"
-        src={clusters.left}
+        src={clusters.left1}
         alt=""
         width={62}
         height={250}
@@ -37,7 +37,7 @@ export function PaperDecor({ variant = "both", className = "" }: Props) {
       />
       <Image
         className="paper-decor__cluster paper-decor__cluster--right"
-        src={clusters.right}
+        src={clusters.right1}
         alt=""
         width={60}
         height={245}

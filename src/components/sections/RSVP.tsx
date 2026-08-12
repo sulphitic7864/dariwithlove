@@ -154,7 +154,7 @@ export function RSVP({ defaultLanguage, copy }: Props) {
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="inline-flex mt-5 min-h-9 items-center justify-center rounded-full bg-black px-8 font-sans text-[9px] sm:min-h-14 sm:px-9 sm:text-[10px] uppercase tracking-[0.09em] text-white transition-transform active:scale-95 disabled:opacity-55"
+                className="inline-flex mt-5 min-h-9 cursor-pointer items-center justify-center rounded-full bg-black px-8 font-sans text-[9px] sm:min-h-14 sm:px-9 sm:text-[10px] uppercase tracking-[0.09em] text-white transition-transform active:scale-95 disabled:opacity-55"
               >
                 {status === "submitting" ? copy.submitting[language] : copy.submit[language]}
               </button>
