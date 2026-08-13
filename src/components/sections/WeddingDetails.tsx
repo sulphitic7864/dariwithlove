@@ -18,7 +18,7 @@ export function WeddingDetails() {
   return (
     <section
       data-reveal
-      className="relative isolate min-h-[100vh] bg-[url('/decor/daria.png.webp')] bg-bottom-right lg:bg-repeat bg-no-repeat overflow-hidden px-5 pb-14 pt-24 opacity-0 translate-y-3 transition-all duration-[850ms] ease-out data-[revealed=true]:translate-y-0 data-[revealed=true]:opacity-100"
+      className="relative isolate min-h-[95vh] bg-[url('/decor/daria.png.webp')] bg-bottom-right lg:bg-repeat bg-no-repeat overflow-hidden px-5 pb-14 pt-24 opacity-0 translate-y-3 transition-all duration-[850ms] ease-out data-[revealed=true]:translate-y-0 data-[revealed=true]:opacity-100"
     >
       {/* <ReferenceDecor preset="invitation" /> */}
       <div className="relative z-10 mx-auto w-full max-w-[275px] text-center sm:max-w-[440px] lg:max-w-[500px]">
