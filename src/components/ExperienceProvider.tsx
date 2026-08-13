@@ -13,7 +13,12 @@ import type { Language, LocalizedText } from "@/data/wedding";
 import { useActiveLanguage } from "@/lib/use-active-language";
 
 const AudioContext = createContext<
-  | { isPlaying: boolean; play: () => Promise<void>; pause: () => void; toggle: () => Promise<void> }
+  | {
+      isPlaying: boolean;
+      play: () => Promise<void>;
+      pause: () => void;
+      toggle: () => Promise<void>;
+    }
   | undefined
 >(undefined);
 
@@ -66,11 +71,21 @@ export function ExperienceProvider({
     else pause();
   }, [pause, play]);
 
-  const value = useMemo(() => ({ isPlaying, play, pause, toggle }), [isPlaying, pause, play, toggle]);
+  const value = useMemo(
+    () => ({ isPlaying, play, pause, toggle }),
+    [isPlaying, pause, play, toggle],
+  );
 
   return (
     <AudioContext.Provider value={value}>
-      <audio ref={audioRef} src={musicSrc} preload="none" loop onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)} />
+      <audio
+        ref={audioRef}
+        src={musicSrc}
+        preload="none"
+        loop
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+      />
       <LoadingScreen
         defaultLanguage={defaultLanguage}
         introVideo={introVideo}
@@ -80,14 +95,19 @@ export function ExperienceProvider({
         openAria={openAria}
       />
       {children}
-      <MusicControl defaultLanguage={defaultLanguage} playAria={playMusicAria} pauseAria={pauseMusicAria} />
+      <MusicControl
+        defaultLanguage={defaultLanguage}
+        playAria={playMusicAria}
+        pauseAria={pauseMusicAria}
+      />
     </AudioContext.Provider>
   );
 }
 
 function useWeddingAudio() {
   const value = useContext(AudioContext);
-  if (!value) throw new Error("useWeddingAudio must be used inside ExperienceProvider");
+  if (!value)
+    throw new Error("useWeddingAudio must be used inside ExperienceProvider");
   return value;
 }
 
@@ -124,22 +144,19 @@ function LoadingScreen({
     window.setTimeout(() => setVisible(false), 800);
   }, []);
 
-  const start = useCallback(async () => {
+  const openWebsite = async () => {
     if (startedRef.current) return;
-    startedRef.current = true;
-    setStarted(true);
-    watchdogRef.current = window.setTimeout(finish, 30000);
-    void playMusic();
 
-    const video = videoRef.current;
-    if (!video) return finish();
-    try {
-      video.currentTime = 0;
-      await video.play();
-    } catch {
-      window.setTimeout(finish, 300);
-    }
-  }, [finish, playMusic]);
+    startedRef.current = true;
+
+    await playMusic();
+
+    setClosing(true);
+
+    window.setTimeout(() => {
+      setVisible(false);
+    }, 800);
+  };
 
   if (!visible) return null;
 
@@ -151,19 +168,21 @@ function LoadingScreen({
         ref={videoRef}
         className="absolute inset-0 h-full w-full object-cover grayscale"
         poster={introVideo.poster}
-        playsInline
         muted
-        preload="metadata"
-        onEnded={finish}
-        onError={() => started && finish()}
+        autoPlay
+        loop
+        playsInline
+        preload="auto"
       >
-        {introVideo.webm ? <source src={introVideo.webm} type="video/webm" /> : null}
+        {introVideo.webm ? (
+          <source src={introVideo.webm} type="video/webm" />
+        ) : null}
         <source src={introVideo.mp4} type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(224,224,222,.15),rgba(255,255,255,.2),rgba(224,224,222,.12))]" />
       <button
         type="button"
-        onClick={start}
+        onClick={openWebsite}
         disabled={started}
         aria-label={openAria[language]}
         className={`relative z-10 flex w-[min(82vw,460px)] cursor-pointer flex-col items-center bg-white/20 px-8 py-8 text-center backdrop-blur-[2px] transition-all duration-500 ${started ? "pointer-events-none translate-y-2 opacity-0" : "opacity-100"}`}
@@ -186,7 +205,11 @@ function MusicControl({
   defaultLanguage,
   playAria,
   pauseAria,
-}: Readonly<{ defaultLanguage: Language; playAria: LocalizedText; pauseAria: LocalizedText }>) {
+}: Readonly<{
+  defaultLanguage: Language;
+  playAria: LocalizedText;
+  pauseAria: LocalizedText;
+}>) {
   const language = useActiveLanguage(defaultLanguage);
   const { isPlaying, toggle } = useWeddingAudio();
 
@@ -198,8 +221,18 @@ function MusicControl({
       aria-pressed={isPlaying}
       className="fixed bottom-[max(14px,env(safe-area-inset-bottom))] right-[max(14px,env(safe-area-inset-right))] z-[120] grid h-9 w-9 place-items-center rounded-full bg-black text-white shadow-[0_6px_18px_rgba(0,0,0,.18)]"
     >
-      <span className={`font-serif text-[15px] ${isPlaying ? "animate-[spin_7s_linear_infinite]" : ""}`} aria-hidden="true">♪</span>
-      {!isPlaying ? <span className="absolute h-px w-5 -rotate-45 bg-white" aria-hidden="true" /> : null}
+      <span
+        className={`font-serif text-[15px] ${isPlaying ? "animate-[spin_7s_linear_infinite]" : ""}`}
+        aria-hidden="true"
+      >
+        ♪
+      </span>
+      {!isPlaying ? (
+        <span
+          className="absolute h-px w-5 -rotate-45 bg-white"
+          aria-hidden="true"
+        />
+      ) : null}
     </button>
   );
 }
